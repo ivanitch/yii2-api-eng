@@ -31,7 +31,7 @@ class m130524_201442_init extends Migration
             'auth_key' => 'NcBMXcpL2fU9w5oJXB0crexMjRMPAXd0',
             'password_hash' => '$2y$13$RM/hpBAaqBLDbpLzhiZyfuFQrVh5MXnhFPVQVMDdjEC4395tMzuX.',
             'password_reset_token' => null,
-            'verification_token' => 'xAvagpK9pe6xufQhT2gCTq58i-l7kJ2P_1606138472',
+            'verification_token' => null,
             'email' => 'admin@gmail.com',
             'status' => 10,
             'created_at' => 1606138472,
