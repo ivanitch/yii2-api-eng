@@ -3,9 +3,10 @@
 namespace backend\controllers;
 
 use backend\forms\CategorySearch;
+use core\forms\manage\Category\CategoryForm;
+use core\services\manage\CategoryManageService;
 use Yii;
 use core\entities\Category\Category;
-use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -15,6 +16,19 @@ use yii\filters\VerbFilter;
  */
 class CategoryController extends Controller
 {
+    private $service;
+
+    public function __construct(
+        $id,
+        $module,
+        CategoryManageService $service,
+        $config = []
+    )
+    {
+        parent::__construct($id, $module, $config);
+        $this->service = $service;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -65,14 +79,19 @@ class CategoryController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Category();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $form = new CategoryForm();
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $category = $this->service->create($form);
+                Yii::$app->session->setFlash('success', 'Категория ' . $category->name . ' добавлена!');
+                return $this->redirect(['view', 'id' => $category->id]);
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
         }
-
         return $this->render('create', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 
@@ -85,14 +104,21 @@ class CategoryController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $category = $this->findModel($id);
+        $form = new CategoryForm($category);
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $this->service->edit($category->id, $form);
+                Yii::$app->session->setFlash('success', 'Категория ' . $category->name . ' обновлена!');
+                return $this->redirect(['view', 'id' => $category->id]);
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
         }
-
         return $this->render('update', [
-            'model' => $model,
+            'model' => $form,
+            'category' => $category,
         ]);
     }
 

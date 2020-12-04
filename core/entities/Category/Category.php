@@ -1,9 +1,6 @@
 <?php
 
 namespace core\entities\Category;
-
-use Yii;
-
 /**
  * This is the model class for table "{{%category}}".
  *
@@ -13,36 +10,22 @@ use Yii;
  */
 class Category extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return '{{%category}}';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
+    public static function create($name, $icon): self
     {
-        return [
-            [['name'], 'required'],
-            [['name'], 'string', 'max' => 100],
-            [['icon'], 'string', 'max' => 120],
-            [['name'], 'unique'],
-        ];
+        $category = new static();
+        $category->name = $name;
+        $category->icon = $icon;
+        return $category;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
+    public function edit($name, $icon): void
     {
-        return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'icon' => 'Icon',
-        ];
+        $this->name = $name;
+        $this->icon = $icon;
     }
 }
