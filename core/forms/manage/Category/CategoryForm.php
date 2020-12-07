@@ -3,9 +3,12 @@
 namespace core\forms\manage\Category;
 
 use core\entities\Category\Category;
-use yii\base\Model;
+use core\forms\CompositeForm;
+/**
+ * @property IconForm $icon;
+ */
 
-class CategoryForm extends Model
+class CategoryForm extends CompositeForm
 {
     public $name;
     public $icon;
@@ -16,8 +19,10 @@ class CategoryForm extends Model
     {
         if ($category) {
             $this->name = $category->name;
-            $this->icon = $category->icon;
+            $this->icon = new IconForm();
             $this->category = $category;
+        } else {
+            $this->icon = new IconForm();
         }
 
         parent::__construct($config);
@@ -31,5 +36,10 @@ class CategoryForm extends Model
             ['icon', 'string', 'max' => 120],
             [['name'], 'unique', 'targetClass' => Category::class, 'filter' => $this->category ? ['<>', 'id', $this->category->id] : null]
         ];
+    }
+
+    protected function internalForms(): array
+    {
+        return ['icon'];
     }
 }

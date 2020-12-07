@@ -24,6 +24,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        |
+        <? if ($model->icon):
+            echo Html::a('Change icon', ['change-icon', 'id' => $model->id], [
+                'class' => 'btn btn-warning',
+            ]);
+            echo ' | ';
+            echo Html::a('Delete icon', ['delete-icon', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Are you sure you want to delete this item?',
+                    'method' => 'post'
+                ]
+            ]);
+        endif; ?>
     </p>
 
     <?= DetailView::widget([
@@ -31,7 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'icon',
+            [
+                'value' => Html::img($model->getIconPath(), ['class' => 'img-responsive']),
+                'label' => 'Icon',
+                'format' => 'raw'
+            ],
         ],
     ]) ?>
 

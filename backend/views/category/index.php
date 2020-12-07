@@ -1,5 +1,6 @@
 <?php
 
+use core\entities\Category\Category;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -27,8 +28,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             //'id',
-            'icon',
-            'name',
+            [
+                'value' => function (Category $model) {
+                    return Html::img($model->getIconPath(), ['width' => 100]);
+                },
+                'label' => 'Icon',
+                'format' => 'raw'
+            ],
+            [
+                'attribute' => 'name',
+                'value' => function (Category $model) {
+                    return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
+                },
+                'format' => 'raw'
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
