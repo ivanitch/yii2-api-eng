@@ -20,5 +20,12 @@ return [
             'class' => 'yii\rest\UrlRule',
             'controller' => 'level'
         ],
+
+        //=== Theme
+        [
+            'pluralize' => true,
+            'class' => 'yii\rest\UrlRule',
+            'controller' => 'theme'
+        ],
     ],
 ];
