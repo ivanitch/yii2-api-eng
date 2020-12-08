@@ -6,6 +6,7 @@ return [
     'enableStrictParsing' => true,
     'showScriptName' => false,
     'rules' => [
-        '' => 'site/index',
+        'POST auth' => 'site/login',
+        'GET profile' => 'profile/index',
     ],
 ];
