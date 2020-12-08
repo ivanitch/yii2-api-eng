@@ -7,7 +7,6 @@ use core\entities\Level\Level;
 use core\entities\Theme\Theme;
 use core\forms\CompositeForm;
 use yii\helpers\ArrayHelper;
-
 /**
  * @property ImageForm $image;
  */
@@ -51,7 +50,7 @@ class ThemeForm extends CompositeForm
 
     public function levelsList(): array
     {
-        return ArrayHelper::map(Level::find()->orderBy('name')->asArray()->all(), 'id', 'name');
+        return ArrayHelper::map(Level::find()->orderBy('id')->asArray()->all(), 'id', 'name');
     }
 
     protected function internalForms(): array

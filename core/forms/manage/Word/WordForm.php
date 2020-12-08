@@ -4,7 +4,6 @@ namespace core\forms\manage\Word;
 
 use core\entities\Word\Word;
 use core\forms\CompositeForm;
-
 /**
  * @property ImageForm $image;
  * @property SoundForm $sound;

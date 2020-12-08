@@ -10,9 +10,9 @@ class WordManageService
 {
     private $repository;
 
-    public function __construct(WordRepository $wordRepository)
+    public function __construct(WordRepository $repository)
     {
-        $this->repository = $wordRepository;
+        $this->repository = $repository;
     }
 
     public function create(WordForm $form): Word
@@ -47,5 +47,10 @@ class WordManageService
     {
         $word = $this->repository->get($id);
         $this->repository->remove($word);
+    }
+
+    public function save(Word $word)
+    {
+        $this->repository->save($word);
     }
 }

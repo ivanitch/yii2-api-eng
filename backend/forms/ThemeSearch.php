@@ -28,17 +28,33 @@ class ThemeSearch extends Model
      */
     public function search(array $params): ActiveDataProvider
     {
-        $query = Theme::find();
+        $query = Theme::find()
+            ->select(['theme.*', 'COUNT(w.word_id) AS count'])
+            ->joinWith(['wordAssignments w'])
+            ->groupBy('theme.id');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
-                'defaultOrder' => ['id' => SORT_ASC]
+                'defaultOrder' => ['id' => SORT_ASC],
             ],
             'pagination' => [
                 'pageSize' => 20,
                 'pageSizeParam' => false
             ],
+        ]);
+
+        $dataProvider->setSort([
+            'attributes' => [
+                'name',
+                'category_id',
+                'level_id',
+                'wordsCount' => [
+                    'asc' => ['count' => SORT_ASC],
+                    'desc' => ['count' => SORT_DESC],
+                    'default' => SORT_ASC
+                ],
+            ]
         ]);
 
         $this->load($params);
@@ -48,12 +64,7 @@ class ThemeSearch extends Model
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
-            'id' => $this->id,
-        ]);
-
-        $query
-            ->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }
@@ -65,6 +76,6 @@ class ThemeSearch extends Model
 
     public function levelsList(): array
     {
-        return ArrayHelper::map(Level::find()->orderBy('name')->asArray()->all(), 'id', 'name');
+        return ArrayHelper::map(Level::find()->orderBy('id')->asArray()->all(), 'id', 'name');
     }
 }

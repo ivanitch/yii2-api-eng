@@ -39,6 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ]);
         endif; ?>
+        |||
+        <?= Html::a('Words', ['add-words', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([
@@ -55,6 +57,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'level_id',
                 'label' => 'Level',
                 'value' => ArrayHelper::getValue($model, 'level.name'),
+            ],
+            [
+                'label' => 'Words Count',
+                'value' => $model->getWordsCount(),
             ],
             [
                 'value' => Html::img($model->getImagePath(), ['class' => 'img-responsive']),

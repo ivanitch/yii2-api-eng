@@ -7,7 +7,7 @@ use yii\web\UploadedFile;
 
 class ImageForm extends Model
 {
-    public $image;
+    public $image; // TODO: rename in file
 
     public function rules()
     {

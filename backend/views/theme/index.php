@@ -59,6 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'label' => 'Level',
             ],
+            'wordsCount',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

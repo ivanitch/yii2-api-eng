@@ -33,7 +33,6 @@ class CategoryForm extends CompositeForm
         return [
             [['name'], 'required'],
             ['name', 'string', 'max' => 100],
-            ['icon', 'string', 'max' => 120],
             [['name'], 'unique', 'targetClass' => Category::class, 'filter' => $this->category ? ['<>', 'id', $this->category->id] : null]
         ];
     }
