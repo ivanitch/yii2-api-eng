@@ -13,5 +13,12 @@ return [
         'GET categories/page=<page:\d+>' => 'category/index',
         'GET categories' => 'category/index',
         'GET categories/<id:\d+>' => 'category/view',
+
+        //=== Level
+        [
+            'pluralize' => true,
+            'class' => 'yii\rest\UrlRule',
+            'controller' => 'level'
+        ],
     ],
 ];
