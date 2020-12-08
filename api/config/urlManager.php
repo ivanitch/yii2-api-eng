@@ -8,5 +8,10 @@ return [
     'rules' => [
         'POST auth' => 'site/login',
         'GET profile' => 'profile/index',
+
+        //=== Category
+        'GET categories/page=<page:\d+>' => 'category/index',
+        'GET categories' => 'category/index',
+        'GET categories/<id:\d+>' => 'category/view',
     ],
 ];

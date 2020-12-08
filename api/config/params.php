@@ -1,4 +1,5 @@
 <?php
 return [
-    'apiPageSize' => 20
+    'API_SECRET' => 'Secret',
+    'API_PAGE_SIZE' => 20,
 ];
