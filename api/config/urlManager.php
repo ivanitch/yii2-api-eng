@@ -27,5 +27,12 @@ return [
             'class' => 'yii\rest\UrlRule',
             'controller' => 'theme'
         ],
+
+        //=== Word
+        [
+            'pluralize' => true,
+            'class' => 'yii\rest\UrlRule',
+            'controller' => 'word'
+        ],
     ],
 ];
