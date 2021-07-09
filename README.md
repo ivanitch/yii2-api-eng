@@ -63,3 +63,25 @@ Get all words
 ```
 http://api.example.com/words
 ```
+Tests
+-------------
+Configure the test database connection in the config
+```
+/common/config/test-local.php
+```
+Create directory for database dump:
+```sh
+mkdir console/migrations-tests
+```
+Create database dump
+```sh
+php yii migrate
+
+php yii migrate/dump
+
+mysql -uroot -proot yii2advanced_test < console/migrations-tests/dump.sql
+```
+Example test
+```sh
+php vendor/bin/codecept run "backend/tests/functional/LoginCest.php"
+```

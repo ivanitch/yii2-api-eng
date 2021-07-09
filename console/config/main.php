@@ -19,7 +19,17 @@ return [
         'fixture' => [
             'class' => 'yii\console\controllers\FixtureController',
             'namespace' => 'common\fixtures',
-          ],
+        ],
+        'migrate' => [
+            'class' => 'console\controllers\MigrateController',
+            'dumpFileName' => __DIR__ . '/../migrations-tests/dump.sql',
+            'migrationNamespaces' => [
+                'yii\queue\db\migrations',
+            ],
+        ],
+        'migrate-tests' => [
+            'class' => 'console\controllers\MigrateController',
+        ],
     ],
     'components' => [
         'log' => [
