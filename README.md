@@ -22,7 +22,13 @@ Install dependencies
 ```
 composer install
 ```
-Connect to the database and set the host for loading images using the example file <code>common/config/params.php</code>
+Run migrations
+```
+php yii magrate
+```
+Default user:   
+login: <strong>admin</strong>  
+password: <strong>12345678</strong>
 
 Configuring a virtual hosts in Apache
 -------------------

@@ -27,7 +27,7 @@ class m130524_201442_init extends Migration
 
         $this->insert('{{%user}}', [
             'id' => 1,
-            'username' => 'admin',
+            'username' => 'admin', // password: 12345678
             'auth_key' => 'NcBMXcpL2fU9w5oJXB0crexMjRMPAXd0',
             'password_hash' => '$2y$13$RM/hpBAaqBLDbpLzhiZyfuFQrVh5MXnhFPVQVMDdjEC4395tMzuX.',
             'password_reset_token' => null,
