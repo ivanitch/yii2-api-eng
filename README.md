@@ -12,7 +12,7 @@ Installation
 -------------------
 Clone project
 ```
-git clone https://github.com/Ivanitch/yii2-api-eng.git
+git clone https://github.com/ivanitch/yii2-api-eng.git
 ```
 Initialize the project
 ```
